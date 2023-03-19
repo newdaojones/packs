@@ -5,10 +5,12 @@ import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { ProviderContextProvider } from './contexts/ProviderContext';
+import { Web3Provider } from '@ethersproject/providers';
+import { getApiKey } from './config';
 
 const { chains, provider } = configureChains(
   [goerli, mainnet, polygonMumbai, polygon, dogechain],
-  [alchemyProvider({ apiKey: 'vYDLoMGpRw9OVSL7-xYVj-0nMWF4_dk' }), publicProvider()],
+  [alchemyProvider({ apiKey: getApiKey() }), publicProvider()],
 );
 
 const wagmiClient = createClient({
@@ -16,6 +18,10 @@ const wagmiClient = createClient({
   connectors: [new InjectedConnector({ chains })],
   provider,
 })
+
+const castProvider = (provider: any): Web3Provider => {
+  return provider as Web3Provider;
+};
 
 function App() {
   return (

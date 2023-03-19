@@ -1,5 +1,4 @@
 // ProviderContext.tsx
-// ProviderContext.tsx
 import { createContext, useContext, ReactNode } from 'react';
 import { Web3Provider } from '@ethersproject/providers';
 
@@ -10,7 +9,7 @@ interface ProviderContextProps {
 
 const ProviderContext = createContext<Web3Provider | null>(null);
 
-export const useProvider = () => {
+export const useProvider = (): Web3Provider => {
   const context = useContext(ProviderContext);
   if (!context) {
     throw new Error('useProvider must be used within a ProviderContextProvider');
