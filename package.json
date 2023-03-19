@@ -10,6 +10,8 @@
     "@types/node": "^16.18.16",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@zoralabs/core": "^1.0.8",
+    "@zoralabs/nft-drop-contracts": "^1.11.1",
     "ethers": "5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
