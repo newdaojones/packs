@@ -1,10 +1,10 @@
 /* src/CreateEditionForm.css */
-.form-container {
+.formContainer {
     display: flex;
     justify-content: space-between;
   }
   
-  .column {
+  .formColumn {
     flex: 1;
     margin-right: 20px;
   }
