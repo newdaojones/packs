@@ -27,13 +27,20 @@ const castProvider = (provider: any): Web3Provider => {
 
 function App() {
   const handleCreateEdition = async (formData: any) => {
-    // Handle form submission here, call your backend API to create an edition and drop
+    // Handle form submission here, call your backend API to create an edition
+  };
+
+  const handleCreateDrop = async (formData: any) => {
+    // Handle form submission here, call your backend API to create a drop
   };
   
   return (
     <WagmiConfig client={wagmiClient}>
       <ProviderContextProvider provider={provider as any}>
-      <CreateEditionForm onSubmit={handleCreateEdition} />
+        <CreateEditionForm 
+          onSubmitEdition={handleCreateEdition}
+          onSubmitDrop={handleCreateDrop}
+        />
         {/* Your routes and components go here */}
       </ProviderContextProvider>
     </WagmiConfig>

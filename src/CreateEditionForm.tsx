@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 
 interface CreateEditionFormProps {
-  onSubmit: (formData: any) => void;
+  onSubmitEdition: (formData: any) => void;
+  onSubmitDrop: (formData: any) => void;
 }
 
-export const CreateEditionForm: React.FC<CreateEditionFormProps> = ({ onSubmit }) => {
+export const CreateEditionForm: React.FC<CreateEditionFormProps> = ({ onSubmitEdition, onSubmitDrop }) => {
   const [name, setName] = useState('');
   const [symbol, setSymbol] = useState('');
   // Add more state variables for other form fields as needed
@@ -16,10 +17,13 @@ export const CreateEditionForm: React.FC<CreateEditionFormProps> = ({ onSubmit }
   const [description, setDescription] = useState('');
   const [animationURI, setAnimationURI] = useState('');
   const [imageURI, setImageURI] = useState('');
+  
+  const [formType, setFormType] = useState<'edition' | 'drop'>('edition');
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleEditionSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
+    onSubmitEdition({
       name,
       symbol,
       editionSize,
@@ -29,41 +33,63 @@ export const CreateEditionForm: React.FC<CreateEditionFormProps> = ({ onSubmit }
       description,
       animationURI,
       imageURI,
-      // Pass the values of other form fields as needed
+    });
+  };
+
+  const handleDropSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmitDrop({
+      name,
+      symbol,
+      editionSize,
+      royaltyBPS,
+      fundsRecipient,
+      defaultAdmin,
+      description,
+      animationURI,
+      imageURI,
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-    <label htmlFor="name">Name:</label>
-    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-
-    <label htmlFor="symbol">Symbol:</label>
-    <input type="text" id="symbol" value={symbol} onChange={(e) => setSymbol(e.target.value)} />
-
-    {/* Add more form fields */}
-    <label htmlFor="editionSize">Edition Size:</label>
-    <input type="number" id="editionSize" value={editionSize} onChange={(e) => setEditionSize(e.target.value)} />
-
-    <label htmlFor="royaltyBPS">Royalty BPS:</label>
-    <input type="number" id="royaltyBPS" value={royaltyBPS} onChange={(e) => setRoyaltyBPS(e.target.value)} />
-
-    <label htmlFor="fundsRecipient">Funds Recipient:</label>
-    <input type="text" id="fundsRecipient" value={fundsRecipient} onChange={(e) => setFundsRecipient(e.target.value)} />
-
-    <label htmlFor="defaultAdmin">Default Admin:</label>
-    <input type="text" id="defaultAdmin" value={defaultAdmin} onChange={(e) => setDefaultAdmin(e.target.value)} />
-
-    <label htmlFor="description">Description:</label>
-    <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-
-    <label htmlFor="animationURI">Animation URI:</label>
-    <input type="text" id="animationURI" value={animationURI} onChange={(e) => setAnimationURI(e.target.value)} />
-
-    <label htmlFor="imageURI">Image URI:</label>
-    <input type="text" id="imageURI" value={imageURI} onChange={(e) => setImageURI(e.target.value)} />
-
-    <button type="submit">Create Edition</button>
-  </form>
+    <div className="form-container">
+      <div className="column">
+        <h2>Create Edition</h2>
+        <form onSubmit={handleEditionSubmit}>
+          {/* Add form elements for creating an edition */}
+          <div>
+            <input
+              type="radio"
+              id="edition"
+              name="formType"
+              value="edition"
+              checked={formType === 'edition'}
+              onChange={() => setFormType('edition')}
+            />
+            <label htmlFor="edition">Edition</label>
+          </div>
+          <button type="submit">Create Edition</button>
+        </form>
+      </div>
+      <div className="column">
+        <h2>Create Drop</h2>
+        <form onSubmit={handleDropSubmit}>
+          {/* Add form elements for creating a drop */}
+          <div>
+            <input
+              type="radio"
+              id="drop"
+              name="formType"
+              value="drop"
+              checked={formType === 'drop'}
+              onChange={() => setFormType('drop')}
+            />
+            <label htmlFor="drop">Drop</label>
+          </div>
+          <button type="submit">Create Drop</button>
+        </form>
+      </div>
+    </div>
   );
+  
 };

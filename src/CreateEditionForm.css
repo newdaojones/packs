@@ -1,0 +1,15 @@
+/* src/CreateEditionForm.css */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .column:last-child {
+    margin-right: 0;
+  }
+  
